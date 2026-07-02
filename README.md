@@ -16,9 +16,13 @@ Abra `http://localhost:3000`.
 
 1. Preencha `NEXT_PUBLIC_WHATSAPP_NUMBER` em `.env.local` com DDI, DDD e número, apenas dígitos.
 2. Ajuste `NEXT_PUBLIC_SITE_URL` para o domínio final.
-3. Execute `npm run build` para validar a versão de produção.
+3. Ajuste `NEXT_PUBLIC_CASE_URL` caso o endereço do case mude.
+4. Para usar a captura real do case, salve o arquivo em `public/images/case-mc-os-papas.png` e configure `NEXT_PUBLIC_CASE_SCREENSHOT=/images/case-mc-os-papas.png`.
+5. Execute `npm run build` para validar a versão de produção.
 
 Sem um número configurado, os botões continuam funcionais e abrem o seletor de contatos do WhatsApp com a mensagem de diagnóstico preenchida.
+
+As mensagens identificam a landing page como origem e os CTAs dos pacotes informam automaticamente o plano escolhido.
 
 ## Stack
 
