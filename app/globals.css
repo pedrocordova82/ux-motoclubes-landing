@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: rgb(255 255 255 / 0.1);
+}
+
+body {
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(189, 125, 61, 0.08), transparent 28rem),
+    #0b0c0d;
+}
+
+::selection {
+  background: #bd7d3d;
+  color: #0b0c0d;
+}
+
+:focus-visible {
+  outline: 2px solid #d9954b;
+  outline-offset: 4px;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-ember;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-8 bg-ember;
+  }
+
+  .section-title {
+    @apply max-w-3xl font-display text-4xl font-semibold uppercase leading-[1.08] tracking-tight text-paper sm:text-5xl lg:text-6xl;
+  }
+
+  .button-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-sm bg-ember px-6 py-3.5 text-sm font-extrabold uppercase tracking-[0.12em] text-ink transition duration-300 hover:bg-[#efac62] hover:shadow-glow;
+  }
+
+  .button-secondary {
+    @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-sm border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-bold uppercase tracking-[0.1em] text-paper transition duration-300 hover:border-ember/60 hover:bg-white/[0.08];
+  }
+
+  .surface {
+    @apply border border-white/10 bg-white/[0.035];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

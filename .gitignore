@@ -1,0 +1,25 @@
+# Dependências instaladas localmente
+node_modules/
+
+# Build e cache do Next.js
+.next/
+out/
+dist/
+build/
+
+# Configurações locais da Vercel
+.vercel/
+
+# Variáveis de ambiente locais
+.env
+.env.local
+.env.*.local
+
+# Arquivos do macOS
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
