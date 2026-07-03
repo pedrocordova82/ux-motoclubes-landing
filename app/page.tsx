@@ -18,6 +18,7 @@ const siteConfig = {
   company: "UX Consultancy",
   companyUrl: "https://ux.tec.br/",
   whatsapp: {
+    // TODO: Configurar o número comercial com DDI e DDD antes do lançamento.
     number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, ""),
     defaultMessage: "Olá, Pedro! Vi a página da Estrada Digital by UX Consultancy sobre sites para motoclubes e gostaria de solicitar um diagnóstico gratuito para o meu MC.",
     planMessage: (plan: string) => `Olá, Pedro! Vi a página da Estrada Digital by UX Consultancy e tenho interesse no plano ${plan} para o site do meu motoclube.`,
@@ -332,15 +333,15 @@ export default function Home() {
             <h2 className="section-title !text-ink">Um processo claro, sem atalhos</h2>
             <p className="max-w-md leading-7 text-black/65">Cada etapa existe para transformar informação dispersa em uma presença digital coerente e duradoura.</p>
           </div>
-          <ol className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          <div role="list" aria-label="Etapas do processo de criação do site" className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {processSteps.map(([number, title, text]) => (
-              <li key={number} className="relative border-t border-black/15 pt-7">
+              <div role="listitem" key={number} className="relative border-t border-black/15 pt-7">
                 <span aria-hidden="true" className="absolute right-0 top-3 font-display text-6xl font-bold text-black/[0.07]">{number}</span>
                 <h3 className="mt-7 font-display text-2xl uppercase">{title}</h3>
                 <p className="mt-3 max-w-sm text-sm leading-6 text-black/75">{text}</p>
-              </li>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
