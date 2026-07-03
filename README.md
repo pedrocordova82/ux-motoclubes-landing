@@ -14,7 +14,7 @@ Abra `http://localhost:3000`.
 
 ## Preparar para publicação
 
-1. Preencha `NEXT_PUBLIC_WHATSAPP_NUMBER` em `.env.local` com DDI, DDD e número, apenas dígitos.
+1. Confirme `NEXT_PUBLIC_WHATSAPP_NUMBER` em `.env.local`; o contato padrão é `5561920008828`.
 2. Ajuste `NEXT_PUBLIC_SITE_URL` para o domínio final.
 3. Ajuste `NEXT_PUBLIC_CASE_URL` caso o endereço do case mude.
 4. Para usar a captura real do case, salve o arquivo em `public/images/case-mc-os-papas.png` e configure `NEXT_PUBLIC_CASE_SCREENSHOT=/images/case-mc-os-papas.png`.

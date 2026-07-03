@@ -18,8 +18,8 @@ const siteConfig = {
   company: "UX Consultancy",
   companyUrl: "https://ux.tec.br/",
   whatsapp: {
-    // TODO: Configurar o número comercial com DDI e DDD antes do lançamento.
-    number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, ""),
+    // A variável de ambiente permite trocar o contato sem alterar o código em futuras campanhas.
+    number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "") || "5561920008828",
     defaultMessage: "Olá, Pedro! Vi a página da Estrada Digital by UX Consultancy sobre sites para motoclubes e gostaria de solicitar um diagnóstico gratuito para o meu MC.",
     planMessage: (plan: string) => `Olá, Pedro! Vi a página da Estrada Digital by UX Consultancy e tenho interesse no plano ${plan} para o site do meu motoclube.`,
   },
