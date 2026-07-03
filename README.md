@@ -10,7 +10,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Abra `http://localhost:3000`.
+Abra `http://localhost:3000/motoclubes`. A raiz redireciona automaticamente para essa rota.
 
 ## Preparar para publicação
 

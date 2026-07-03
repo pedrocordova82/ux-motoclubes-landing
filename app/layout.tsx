@@ -15,7 +15,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://estradadigital.com.br"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://ux.tec.br"),
   title: {
     default: "Sites para Motoclubes | Estrada Digital by UX Consultancy",
     template: "%s | Estrada Digital by UX Consultancy",
