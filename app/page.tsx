@@ -132,10 +132,9 @@ function Logo() {
   return (
     <a href="#inicio" className="flex items-center gap-3" aria-label={`${siteConfig.brand} by ${siteConfig.company} — início`}>
       <span className="grid h-10 w-10 place-items-center border border-ember/70 text-ember"><Icon name="compass" className="h-6 w-6" /></span>
-      <span className="leading-none">
-        <strong className="block font-display text-lg uppercase tracking-[0.13em]">{brandPrimary}</strong>
-        <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/50">{brandSecondary}</span>
-        <span className="ml-2 text-[8px] font-semibold uppercase tracking-[0.12em] text-white/35">by {siteConfig.company}</span>
+      <span className="leading-tight">
+        <strong className="block font-display text-lg uppercase tracking-[0.11em]">{brandPrimary} <span className="text-white/65">{brandSecondary}</span></strong>
+        <span className="block text-[9px] font-bold uppercase tracking-[0.16em] text-ember">by {siteConfig.company}</span>
       </span>
     </a>
   );
@@ -173,7 +172,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[linear-gradient(0deg,#0b0c0d_0%,transparent_35%,rgba(0,0,0,.25)_100%)] lg:bg-[linear-gradient(0deg,#0b0c0d_0%,transparent_32%)]" />
         <div className="container-page relative z-10">
           <div className="max-w-4xl">
-            <p className="eyebrow">Presença digital com propósito</p>
+            <p className="eyebrow">{siteConfig.brand} by {siteConfig.company}</p>
             <h1 className="max-w-[900px] font-display text-[2.75rem] font-semibold uppercase leading-[1.02] tracking-[-0.025em] text-white sm:text-6xl lg:text-[5.2rem]">
               Sites institucionais para motoclubes que valorizam <span className="text-ember">história, identidade e estrada.</span>
             </h1>
@@ -230,7 +229,7 @@ export default function Home() {
               <ul className="mt-5 grid gap-x-5 gap-y-4 text-sm text-white/70 sm:grid-cols-2">
                 {caseDeliverables.map((item) => <li key={item} className="flex gap-3"><Icon name="check" className="h-5 w-5 shrink-0 text-ember" />{item}</li>)}
               </ul>
-              <p className="mt-7 max-w-xl border-l border-ember/45 pl-4 text-sm leading-6 text-white/50">Esse case serve como referência de qualidade, mas cada motoclube recebe uma solução própria, respeitando sua identidade, sua história e sua estrutura.</p>
+              <p className="mt-7 max-w-xl border-l border-ember/45 pl-4 text-sm leading-6 text-white/60">Esse case serve como referência de qualidade, mas cada motoclube recebe uma solução própria, respeitando sua identidade, sua história e sua estrutura.</p>
               <a
                 href={siteConfig.case.url}
                 target="_blank"
@@ -292,7 +291,7 @@ export default function Home() {
                     <span className="grid h-8 w-8 shrink-0 place-items-center border border-ember/35 text-ember"><Icon name="check" className="h-4 w-4" /></span>
                     <h3 className="font-display text-lg uppercase tracking-wide text-paper">{item.title}</h3>
                   </div>
-                  <p className="mt-4 text-sm leading-6 text-white/50">{item.text}</p>
+                  <p className="mt-4 text-sm leading-6 text-white/60">{item.text}</p>
                 </li>
               ))}
             </ul>
@@ -313,7 +312,7 @@ export default function Home() {
                 {item.featured && <span className="absolute right-0 top-0 bg-ember px-4 py-2 text-[10px] font-extrabold uppercase tracking-[.16em] text-ink">Recomendado</span>}
                 <span className="text-[11px] font-bold uppercase tracking-[.18em] text-ember">{item.label}</span>
                 <h3 className="mt-5 max-w-[14rem] font-display text-3xl uppercase leading-tight">{item.name}</h3>
-                <p className="mt-5 min-h-20 text-sm leading-6 text-white/50">{item.text}</p>
+                <p className="mt-5 min-h-20 text-sm leading-6 text-white/60">{item.text}</p>
                 <div className="my-7 h-px bg-white/10" />
                 <ul className="flex-1 space-y-4 text-sm text-white/70">
                   {item.features.map((feature) => <li key={feature} className="flex gap-3"><Icon name="check" className="h-5 w-5 shrink-0 text-ember" />{feature}</li>)}
@@ -358,7 +357,7 @@ export default function Home() {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 font-semibold text-white/90 marker:hidden">
                   {question}<span aria-hidden="true" className="text-2xl font-light text-ember transition group-open:rotate-45">+</span>
                 </summary>
-                <p className="max-w-2xl pb-7 pr-8 text-sm leading-7 text-white/50">{answer}</p>
+                <p className="max-w-2xl pb-7 pr-8 text-sm leading-7 text-white/60">{answer}</p>
               </details>
             ))}
           </div>
@@ -383,7 +382,7 @@ export default function Home() {
           <Logo />
           <div>
             <p className="text-xs leading-5 text-white/45">© {year} {siteConfig.brand} by <a href={siteConfig.companyUrl} target="_blank" rel="noreferrer" className="text-white/70 underline decoration-white/20 underline-offset-4 hover:text-ember">{siteConfig.company}</a>. Sites institucionais para motoclubes que constroem história sobre duas rodas.</p>
-            <p className="mt-1 text-[11px] leading-5 text-white/30">Projeto, desenvolvimento e publicação com proposta formal, contrato, emissão de nota fiscal e manutenção opcional.</p>
+            <p className="mt-1 text-[11px] leading-5 text-white/50">Projeto, desenvolvimento e publicação com proposta formal, contrato, emissão de nota fiscal e manutenção opcional.</p>
           </div>
           <a href="#inicio" className="text-xs font-bold uppercase tracking-[.14em] text-white/50 hover:text-ember">Voltar ao topo ↑</a>
         </div>
