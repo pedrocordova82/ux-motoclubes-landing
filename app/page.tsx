@@ -12,24 +12,26 @@ type IconName =
   | "network"
   | "shield";
 
-const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "");
-const companyUrl = "https://ux.tec.br/";
-// URL e imagem do case ficam centralizadas para permitir ajustes pela Vercel sem alterar o componente.
-const caseStudy = {
-  url: process.env.NEXT_PUBLIC_CASE_URL || "https://mcospapas.com.br/",
-  screenshot: process.env.NEXT_PUBLIC_CASE_SCREENSHOT || "/images/hero-estrada.png",
-  hasRealScreenshot: Boolean(process.env.NEXT_PUBLIC_CASE_SCREENSHOT?.trim()),
-};
-const whatsappMessages = {
-  diagnosis: "Olá! Vim pela landing page Estrada Digital, uma solução UX Consultancy para motoclubes, e gostaria de solicitar um diagnóstico gratuito da presença digital do meu MC.",
-  conversation: "Olá! Vim pela landing page Estrada Digital, da UX Consultancy, e gostaria de conversar sobre o site do meu motoclube.",
-  evaluation: "Olá! Vim pela landing page Estrada Digital, da UX Consultancy, e quero avaliar a presença digital do meu MC.",
-  plan: (plan: string) => `Olá! Vim pela landing page Estrada Digital, da UX Consultancy, e gostaria de conversar sobre o plano ${plan} para o site do meu motoclube.`,
+// Dados comerciais e URLs sensíveis à publicação ficam centralizados para evitar divergência entre os CTAs.
+const siteConfig = {
+  brand: "Estrada Digital",
+  company: "UX Consultancy",
+  companyUrl: "https://ux.tec.br/",
+  whatsapp: {
+    number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, ""),
+    defaultMessage: "Olá, Pedro! Vi a página da Estrada Digital by UX Consultancy sobre sites para motoclubes e gostaria de solicitar um diagnóstico gratuito para o meu MC.",
+    planMessage: (plan: string) => `Olá, Pedro! Vi a página da Estrada Digital by UX Consultancy e tenho interesse no plano ${plan} para o site do meu motoclube.`,
+  },
+  case: {
+    url: process.env.NEXT_PUBLIC_CASE_URL || "https://mcospapas.com.br/",
+    screenshot: process.env.NEXT_PUBLIC_CASE_SCREENSHOT || "/images/hero-estrada.png",
+    hasRealScreenshot: Boolean(process.env.NEXT_PUBLIC_CASE_SCREENSHOT?.trim()),
+  },
 };
 
 function getWhatsAppUrl(message: string) {
   // Sem número configurado, o WhatsApp abre o seletor de contatos sem apontar para um telefone fictício.
-  const baseUrl = whatsappNumber ? `https://wa.me/${whatsappNumber}` : "https://wa.me/";
+  const baseUrl = siteConfig.whatsapp.number ? `https://wa.me/${siteConfig.whatsapp.number}` : "https://wa.me/";
   return `${baseUrl}?text=${encodeURIComponent(message)}`;
 }
 
@@ -54,23 +56,25 @@ const caseDeliverables = [
 ];
 
 const trustItems = [
-  "Atendimento consultivo",
-  "Desenvolvimento sob medida",
-  "Proposta formal",
-  "Contrato de prestação de serviço",
-  "Emissão de nota fiscal",
-  "Suporte pós-publicação",
+  { title: "Atendimento consultivo", text: "Entendemos a história, a estrutura e o momento atual do MC antes de propor qualquer solução." },
+  { title: "Desenvolvimento sob medida", text: "A experiência é criada respeitando identidade, brasão, tradição, sedes e objetivos do motoclube." },
+  { title: "Proposta formal", text: "O escopo, os prazos e o investimento são apresentados de forma clara antes do início." },
+  { title: "Contrato de prestação de serviço", text: "A contratação pode ser formalizada para trazer mais segurança para a diretoria e para o projeto." },
+  { title: "Emissão de nota fiscal", text: "O serviço pode ser realizado pela UX Consultancy com emissão de nota fiscal." },
+  { title: "Suporte pós-publicação", text: "Após a publicação, é possível contratar manutenção para atualizações, ajustes e evolução do site." },
 ];
 
 const packages = [
   {
     name: "Institucional Essencial",
+    cta: "Quero avaliar o plano Essencial",
     label: "Presença oficial",
     text: "Para MCs que precisam estabelecer uma base digital clara, segura e profissional.",
     features: ["Página institucional completa", "História e identidade do MC", "Sedes e canais de contato", "SEO e experiência mobile", "Integração com WhatsApp"],
   },
   {
     name: "Institucional Completo",
+    cta: "Quero avaliar o plano Completo",
     label: "Mais escolhido",
     featured: true,
     text: "Para motoclubes com regionais, agenda ativa e uma história que merece mais profundidade.",
@@ -78,6 +82,7 @@ const packages = [
   },
   {
     name: "Portal do Motoclube",
+    cta: "Quero avaliar o Portal do Motoclube",
     label: "Estrutura avançada",
     text: "Para organizações maiores, com conteúdo recorrente e necessidades específicas de gestão.",
     features: ["Arquitetura sob medida", "Painel de conteúdo completo", "Regionais e eventos avançados", "Busca e filtros de conteúdo", "Integrações personalizadas", "Suporte evolutivo"],
@@ -100,7 +105,8 @@ const faqs = [
   ["Vocês trabalham com a identidade que já temos?", "Sim. Brasão, cores, símbolos e diretrizes existentes são respeitados. Nosso trabalho é criar um sistema visual digital coerente, sem descaracterizar a identidade do motoclube."],
   ["Quanto tempo leva para o site ficar pronto?", "O prazo depende do escopo e da disponibilidade do conteúdo. Um site institucional costuma levar de 4 a 8 semanas após a etapa de diagnóstico."],
   ["Hospedagem e domínio estão incluídos?", "Podemos cuidar de toda a configuração e orientar a contratação em nome do motoclube. Os custos recorrentes são apresentados com transparência antes do início."],
-  ["Vocês emitem nota fiscal e trabalham com contrato?", "Sim. O serviço é realizado por empresa formalizada, com proposta comercial, contrato de prestação de serviço e emissão de nota fiscal, trazendo mais segurança para a diretoria e para o motoclube."],
+  ["Vocês emitem nota fiscal e trabalham com contrato?", "Sim. O serviço pode ser realizado pela UX Consultancy, com proposta comercial, contrato de prestação de serviço e emissão de nota fiscal, trazendo mais segurança para a diretoria e para o motoclube."],
+  ["O site substitui o Instagram ou Facebook do motoclube?", "Não. O site complementa as redes sociais. Enquanto Instagram e Facebook ajudam na comunicação do dia a dia, o site funciona como presença oficial, organizada e permanente para história, sedes, eventos, contatos e informações institucionais."],
 ];
 
 function Icon({ name, className = "h-5 w-5" }: { name: IconName; className?: string }) {
@@ -121,22 +127,24 @@ function Icon({ name, className = "h-5 w-5" }: { name: IconName; className?: str
 }
 
 function Logo() {
+  const [brandPrimary, brandSecondary] = siteConfig.brand.split(" ");
+
   return (
-    <a href="#inicio" className="flex items-center gap-3" aria-label="Estrada Digital — início">
+    <a href="#inicio" className="flex items-center gap-3" aria-label={`${siteConfig.brand} by ${siteConfig.company} — início`}>
       <span className="grid h-10 w-10 place-items-center border border-ember/70 text-ember"><Icon name="compass" className="h-6 w-6" /></span>
       <span className="leading-none">
-        <strong className="block font-display text-lg uppercase tracking-[0.13em]">Estrada</strong>
-        <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/50">Digital</span>
-        <span className="ml-2 text-[8px] font-semibold uppercase tracking-[0.12em] text-white/35">by UX Consultancy</span>
+        <strong className="block font-display text-lg uppercase tracking-[0.13em]">{brandPrimary}</strong>
+        <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/50">{brandSecondary}</span>
+        <span className="ml-2 text-[8px] font-semibold uppercase tracking-[0.12em] text-white/35">by {siteConfig.company}</span>
       </span>
     </a>
   );
 }
 
-function WhatsAppButton({ children, message, variant = "primary", className = "" }: { children: React.ReactNode; message: string; variant?: "primary" | "secondary"; className?: string }) {
+function WhatsAppButton({ label, message, variant = "primary", className = "" }: { label: string; message: string; variant?: "primary" | "secondary"; className?: string }) {
   return (
-    <a className={`${variant === "primary" ? "button-primary" : "button-secondary"} ${className}`} href={getWhatsAppUrl(message)} target="_blank" rel="noreferrer" aria-label="Iniciar conversa com a UX Consultancy pelo WhatsApp em uma nova aba">
-      <Icon name="message" /> {children}
+    <a className={`${variant === "primary" ? "button-primary" : "button-secondary"} ${className}`} href={getWhatsAppUrl(message)} target="_blank" rel="noreferrer" aria-label={`${label} pelo WhatsApp em uma nova aba`}>
+      <Icon name="message" /> <span>{label}</span> <Icon name="arrow" />
     </a>
   );
 }
@@ -154,7 +162,7 @@ export default function Home() {
               <a key={item} href={["#presenca", "#case", "#planos", "#processo"][index]} className="text-xs font-bold uppercase tracking-[0.14em] text-white/65 transition hover:text-white">{item}</a>
             ))}
           </nav>
-          <WhatsAppButton message={whatsappMessages.conversation} variant="secondary" className="hidden sm:inline-flex">Conversar sobre o site do meu motoclube</WhatsAppButton>
+          <WhatsAppButton label="Solicitar diagnóstico gratuito" message={siteConfig.whatsapp.defaultMessage} variant="secondary" className="hidden sm:inline-flex" />
           <a href="#diagnostico" className="text-xs font-bold uppercase tracking-[0.16em] text-ember sm:hidden">Diagnóstico</a>
         </div>
       </header>
@@ -170,11 +178,11 @@ export default function Home() {
               Sites institucionais para motoclubes que valorizam <span className="text-ember">história, identidade e estrada.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">
-              Ajudamos motoclubes a construir uma presença digital oficial, moderna e organizada — feita para preservar sua trajetória e aproximar pessoas.
+              Ajudamos motoclubes a construir uma presença digital oficial, moderna e organizada — com atendimento consultivo, desenvolvimento profissional e entrega formalizada pela UX Consultancy.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <WhatsAppButton message={whatsappMessages.diagnosis}>Solicitar diagnóstico gratuito do meu MC <Icon name="arrow" /></WhatsAppButton>
-              <a href="#case" className="button-secondary">Conhecer nosso trabalho</a>
+              <WhatsAppButton label="Solicitar diagnóstico gratuito do meu MC" message={siteConfig.whatsapp.defaultMessage} />
+              <a href="#case" className="button-secondary">Conhecer o case MC Os Papas</a>
             </div>
             <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-xs font-semibold uppercase tracking-[0.1em] text-white/50">
               {["Projeto sob medida", "Mobile-first", "Suporte humano"].map((item) => <span key={item} className="flex items-center gap-2"><Icon name="check" className="h-4 w-4 text-ember" />{item}</span>)}
@@ -215,15 +223,16 @@ export default function Home() {
         <div className="container-page">
           <div className="grid items-center gap-16 lg:grid-cols-[.9fr_1.1fr] lg:gap-20">
             <div>
-              <p className="eyebrow">Projeto em destaque</p>
+              <p className="eyebrow">Projeto de referência: MC Os Papas</p>
               <h2 className="section-title">MC Os Papas</h2>
-              <p className="mt-6 max-w-lg text-lg leading-8 text-white/65">Uma experiência digital criada para transformar décadas de estrada em um patrimônio institucional vivo, acessível e organizado.</p>
-              <p className="mt-9 text-[11px] font-bold uppercase tracking-[.18em] text-ember">O que foi entregue</p>
+              <p className="mt-6 max-w-lg text-lg leading-8 text-white/65">O site do MC Os Papas foi desenvolvido para transformar a história, as sedes, os eventos e os canais de contato do motoclube em uma presença digital oficial, moderna e acessível.</p>
+              <p className="mt-9 text-[11px] font-bold uppercase tracking-[.18em] text-ember">O que foi entregue no projeto</p>
               <ul className="mt-5 grid gap-x-5 gap-y-4 text-sm text-white/70 sm:grid-cols-2">
                 {caseDeliverables.map((item) => <li key={item} className="flex gap-3"><Icon name="check" className="h-5 w-5 shrink-0 text-ember" />{item}</li>)}
               </ul>
+              <p className="mt-7 max-w-xl border-l border-ember/45 pl-4 text-sm leading-6 text-white/50">Esse case serve como referência de qualidade, mas cada motoclube recebe uma solução própria, respeitando sua identidade, sua história e sua estrutura.</p>
               <a
-                href={caseStudy.url}
+                href={siteConfig.case.url}
                 target="_blank"
                 rel="noreferrer"
                 className="button-secondary mt-9"
@@ -235,11 +244,11 @@ export default function Home() {
 
             <div className="relative mx-auto w-full max-w-2xl">
               <div className="absolute -inset-12 bg-ember/10 blur-3xl" />
-              <a href={caseStudy.url} target="_blank" rel="noreferrer" className="group relative block rotate-1 border border-white/15 bg-[#080909] p-2 shadow-2xl transition duration-500 hover:rotate-0 hover:border-ember/50" aria-label="Abrir o site do MC Os Papas em uma nova aba">
+              <a href={siteConfig.case.url} target="_blank" rel="noreferrer" className="group relative block rotate-1 border border-white/15 bg-[#080909] p-2 shadow-2xl transition duration-500 hover:rotate-0 hover:border-ember/50" aria-label="Abrir o site do MC Os Papas em uma nova aba">
                 <div className="flex h-9 items-center gap-2 border-b border-white/10 px-3"><i className="h-2 w-2 rounded-full bg-ember" /><i className="h-2 w-2 rounded-full bg-white/15" /><i className="h-2 w-2 rounded-full bg-white/15" /><span className="mx-auto text-[9px] uppercase tracking-[.2em] text-white/25">mcospapas.com.br</span></div>
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#111]">
-                  <Image src={caseStudy.screenshot} alt={caseStudy.hasRealScreenshot ? "Página inicial do site do MC Os Papas" : ""} fill sizes="(min-width: 1024px) 50vw, 90vw" className={`object-cover object-top transition duration-700 group-hover:scale-[1.02] ${caseStudy.hasRealScreenshot ? "" : "opacity-45"}`} />
-                  {!caseStudy.hasRealScreenshot && <>
+                  <Image src={siteConfig.case.screenshot} alt={siteConfig.case.hasRealScreenshot ? "Página inicial do site do MC Os Papas" : ""} fill sizes="(min-width: 1024px) 50vw, 90vw" className={`object-cover object-top transition duration-700 group-hover:scale-[1.02] ${siteConfig.case.hasRealScreenshot ? "" : "opacity-45"}`} />
+                  {!siteConfig.case.hasRealScreenshot && <>
                     <div className="absolute inset-0 bg-gradient-to-r from-black via-black/65 to-transparent" />
                     <div className="absolute left-[8%] top-[10%] flex items-center gap-2 text-[6px] font-bold uppercase tracking-[.2em] text-white sm:text-[8px]"><Icon name="shield" className="h-5 w-5 text-ember" /> MC OS PAPAS <span className="ml-5 text-white/35">História &nbsp; Sedes &nbsp; Eventos</span></div>
                     <div className="absolute left-[8%] top-[34%] max-w-[55%]">
@@ -254,7 +263,7 @@ export default function Home() {
               <div className="absolute -bottom-8 -right-2 w-[35%] -rotate-2 border border-white/15 bg-ink p-1.5 shadow-2xl sm:-right-6">
                 <div className="aspect-[9/17] overflow-hidden border border-white/5 bg-coal">
                   <div className="relative h-[45%]">
-                    <Image src={caseStudy.screenshot} alt="" fill sizes="180px" className="object-cover object-top opacity-55" />
+                    <Image src={siteConfig.case.screenshot} alt="" fill sizes="180px" className="object-cover object-top opacity-55" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-coal" />
                     <Icon name="shield" className="absolute left-2 top-2 h-4 w-4 text-ember" />
                     <p className="absolute bottom-3 left-2 font-display text-[10px] uppercase leading-tight sm:text-base">A estrada nos une.</p>
@@ -269,14 +278,23 @@ export default function Home() {
 
       <section id="confianca" className="border-b border-white/10 bg-[#0e1011] py-20 sm:py-24">
         <div className="container-page">
-          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
             <div>
-              <p className="eyebrow">Segurança para a diretoria</p>
+              <p className="eyebrow">Confiança para a diretoria</p>
               <h2 className="section-title !text-4xl sm:!text-5xl">Projeto profissional, do diagnóstico à publicação</h2>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-white/55">Estrada Digital é uma solução da <a href={companyUrl} target="_blank" rel="noreferrer" className="font-semibold text-paper underline decoration-ember/70 underline-offset-4 hover:text-ember">UX Consultancy</a> para motoclubes, com atendimento próximo e uma relação comercial transparente.</p>
+              <p className="mt-5 max-w-xl text-sm leading-7 text-white/60">Mais do que criar uma página bonita, conduzimos o projeto com clareza, organização e segurança para o motoclube.</p>
+              <p className="mt-4 text-xs leading-6 text-white/40">{siteConfig.brand} é uma solução da <a href={siteConfig.companyUrl} target="_blank" rel="noreferrer" className="font-semibold text-paper underline decoration-ember/70 underline-offset-4 hover:text-ember">{siteConfig.company}</a>.</p>
             </div>
             <ul className="grid gap-px bg-white/10 sm:grid-cols-2">
-              {trustItems.map((item) => <li key={item} className="flex min-h-20 items-center gap-4 bg-[#0e1011] px-6 py-5 text-sm font-semibold text-white/75"><span className="grid h-8 w-8 shrink-0 place-items-center border border-ember/35 text-ember"><Icon name="check" className="h-4 w-4" /></span>{item}</li>)}
+              {trustItems.map((item) => (
+                <li key={item.title} className="min-h-40 bg-[#0e1011] px-6 py-6">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center border border-ember/35 text-ember"><Icon name="check" className="h-4 w-4" /></span>
+                    <h3 className="font-display text-lg uppercase tracking-wide text-paper">{item.title}</h3>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-white/50">{item.text}</p>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -300,10 +318,11 @@ export default function Home() {
                 <ul className="flex-1 space-y-4 text-sm text-white/70">
                   {item.features.map((feature) => <li key={feature} className="flex gap-3"><Icon name="check" className="h-5 w-5 shrink-0 text-ember" />{feature}</li>)}
                 </ul>
-                <WhatsAppButton message={whatsappMessages.plan(item.name)} variant={item.featured ? "primary" : "secondary"} className="mt-8 w-full">Conversar sobre este plano</WhatsAppButton>
+                <WhatsAppButton label={item.cta} message={siteConfig.whatsapp.planMessage(item.name)} variant={item.featured ? "primary" : "secondary"} className="mt-8 w-full" />
               </article>
             ))}
           </div>
+          <p className="mx-auto mt-12 max-w-4xl border-t border-white/10 pt-8 text-center text-sm leading-7 text-white/50">Cada projeto é orçado conforme a estrutura do motoclube, quantidade de sedes, volume de conteúdo, necessidade de atualização e integrações desejadas. Após o diagnóstico, enviamos uma proposta objetiva com escopo, prazo e investimento.</p>
         </div>
       </section>
 
@@ -317,9 +336,8 @@ export default function Home() {
           <ol className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {processSteps.map(([number, title, text]) => (
               <li key={number} className="relative border-t border-black/15 pt-7">
-                <span className="absolute right-0 top-3 font-display text-6xl font-bold text-black/[0.055]">{number}</span>
-                <span className="text-xs font-extrabold tracking-[.18em] text-[#9b5b24]">{number}</span>
-                <h3 className="mt-4 font-display text-2xl uppercase">{title}</h3>
+                <span aria-hidden="true" className="absolute right-0 top-3 font-display text-6xl font-bold text-black/[0.07]">{number}</span>
+                <h3 className="mt-7 font-display text-2xl uppercase">{title}</h3>
                 <p className="mt-3 max-w-sm text-sm leading-6 text-black/75">{text}</p>
               </li>
             ))}
@@ -353,10 +371,10 @@ export default function Home() {
         <div className="container-page relative text-center">
           <Icon name="compass" className="mx-auto h-12 w-12 text-ember" />
           <p className="mt-7 text-xs font-bold uppercase tracking-[.22em] text-ember">Diagnóstico inicial gratuito</p>
-          <h2 className="mx-auto mt-5 max-w-4xl font-display text-4xl uppercase leading-tight sm:text-5xl lg:text-7xl">A história do seu motoclube merece um endereço à altura.</h2>
-          <p className="mx-auto mt-6 max-w-xl leading-7 text-white/60">Conte onde vocês estão hoje. Nós ouvimos, organizamos as possibilidades e indicamos o melhor caminho — com clareza e sem compromisso.</p>
-          <WhatsAppButton message={whatsappMessages.evaluation} className="mt-9">Quero avaliar a presença digital do meu MC <Icon name="arrow" /></WhatsAppButton>
-          <p className="mt-4 text-xs text-white/35">Resposta humana • Sem compromisso • Atendimento pela UX Consultancy</p>
+          <h2 className="mx-auto mt-5 max-w-4xl font-display text-4xl uppercase leading-tight sm:text-5xl lg:text-7xl">A história do seu motoclube merece uma presença oficial.</h2>
+          <p className="mx-auto mt-6 max-w-2xl leading-7 text-white/60">Conte onde o MC está hoje. Nós avaliamos a presença digital atual, organizamos as possibilidades e indicamos o melhor caminho — com clareza, respeito e sem compromisso.</p>
+          <WhatsAppButton label="Solicitar diagnóstico gratuito do meu MC" message={siteConfig.whatsapp.defaultMessage} className="mt-9" />
+          <p className="mt-4 text-xs text-white/40">Atendimento humano • Proposta formal • Contrato e nota fiscal • Manutenção opcional</p>
         </div>
       </section>
 
@@ -364,8 +382,8 @@ export default function Home() {
         <div className="container-page grid items-center gap-7 text-center sm:grid-cols-[auto_1fr_auto] sm:text-left">
           <Logo />
           <div>
-            <p className="text-xs leading-5 text-white/45">© {year} Estrada Digital by <a href={companyUrl} target="_blank" rel="noreferrer" className="text-white/70 underline decoration-white/20 underline-offset-4 hover:text-ember">UX Consultancy</a>. Sites institucionais para quem constrói história sobre duas rodas.</p>
-            <p className="mt-1 text-[11px] leading-5 text-white/30">Serviço prestado por empresa formalizada, com proposta comercial, contrato, emissão de nota fiscal e manutenção opcional.</p>
+            <p className="text-xs leading-5 text-white/45">© {year} {siteConfig.brand} by <a href={siteConfig.companyUrl} target="_blank" rel="noreferrer" className="text-white/70 underline decoration-white/20 underline-offset-4 hover:text-ember">{siteConfig.company}</a>. Sites institucionais para motoclubes que constroem história sobre duas rodas.</p>
+            <p className="mt-1 text-[11px] leading-5 text-white/30">Projeto, desenvolvimento e publicação com proposta formal, contrato, emissão de nota fiscal e manutenção opcional.</p>
           </div>
           <a href="#inicio" className="text-xs font-bold uppercase tracking-[.14em] text-white/50 hover:text-ember">Voltar ao topo ↑</a>
         </div>
